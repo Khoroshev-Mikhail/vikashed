@@ -67,21 +67,13 @@ model Article {
   id       Int    @id @default(autoincrement())
   name     String
   text     Json
-  topic_id Int    @unique
-  Topic    Topic  @relation(fields: [topic_id], references: [id])
+  topic    Topic[]
 }
 
-model Menu {
-  id    Int    @id @default(autoincrement())
-  name  String
-  Topic Topic?
-}
 
 model Topic {
   id      Int      @id @default(autoincrement())
   name    String
-  menu_id Int      @unique
-  Article Article?
-  Menu    Menu     @relation(fields: [menu_id], references: [id])
+  article Article[]
 }
 
