@@ -7,7 +7,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   if (req.method === 'GET') {
     try {
       const article = await prisma.article.findUnique({
-        where: { id: Number(id) },
+          where: { id: Number(id) },
+          include: {
+            topic: {
+              select: {
+                id: true,
+              }
+            },
+          },
       });
 
       if (!article) {

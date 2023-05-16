@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Topics from '@/components/admin/article/topics';
 
 const ArticleForm = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const { id } = router.query as { id: string };
 
   const [article, setArticle] = useState<any>({});
   const [name, setName] = useState('');
@@ -89,22 +90,7 @@ const ArticleForm = () => {
         />
       </div>
       <div>
-        <label>Topics:</label>
-        {article && topics?.map((topic: any) => {
-          const isChecked = article?.topicIds?.includes(topic.id);
-          return (
-            <div key={topic.id}>
-              <input
-                type="checkbox"
-                id={topic.id}
-                value={topic.id}
-                checked={isChecked}
-                onChange={() => handleCheckboxChange(topic.id)}
-              />
-              <label htmlFor={topic.id}>{topic.name}</label>
-            </div>
-          );
-        })}
+        <Topics id={id}/>
       </div>
       <button type="submit">Submit</button>
     </form>
