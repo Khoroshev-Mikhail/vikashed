@@ -1,100 +1,70 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import Topics from '@/components/admin/article/topics';
+import useSWR from 'swr'
+import Topics from '@/components/admin/article/Topics';
+import useSWRMutation from 'swr/mutation'
+import { updateFetch } from '@/lib/fetchers';
+import { ReqBodyPutArticle } from '@/pages/api/article/[id]';
+
 
 const ArticleForm = () => {
-  const router = useRouter();
-  const { id } = router.query as { id: string };
+    const router = useRouter();
+    const { id } = router.query as { id: string };
 
-  const [article, setArticle] = useState<any>({});
-  const [name, setName] = useState('');
-  const [text, setText] = useState('');
-  const [topics, setTopics] = useState([]);
+    const [name, setName] = useState<string>('');
+    const [text, setText] = useState<string>('');
+    const [connections, setConnections] = useState<number[]>([]);
 
-  useEffect(() => {
-    if (id) {
-      fetch(`/api/article/${id}`)
-        .then((response) => response.json())
-        .then((data) => {
-          setArticle(data);
-          setName(data.name);
-          setText(data.text);
-        })
-        .catch((error) => console.error('Error fetching article:', error));
-    }
-  }, [id]);
+    const { data, error, isLoading } = useSWR<ArticleWithConnections>(id ? `/api/article/${id}` : null)
+    const { trigger, isMutating } = useSWRMutation(`/api/article/${id}`, updateFetch)
 
-  useEffect(() => {
-    fetch('/api/topic')
-      .then((response) => response.json())
-      .then((data) => {
-        setTopics(data);
-      })
-      .catch((error) => console.error('Error fetching topics:', error));
-  }, []);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-  
-    const selectedTopicIds = topics
-      .filter((topic: any) => topic.checked)
-      .map((topic: any) => topic.id);
-  
-    const payload = {
-      name,
-      text,
-      topicIds: selectedTopicIds,
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        try {
+            trigger({ name, text, topic: connections } as ReqBodyPutArticle)
+        } catch (error) {
+            console.error('Error updating article:', error);
+        }
     };
-  
-    try {
-      const response = await fetch(`/api/article/${id}`, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(payload),
-      });
-  
-      if (response.ok) {
-        // Handle success
-      } else {
-        // Handle error
-      }
-    } catch (error) {
-      console.error('Error updating article:', error);
-    }
-  };
-  
 
-  const handleCheckboxChange = (topicId: number) => {
-    // Handle checkbox change
-  };
+    useEffect(() => {
+        if (data) {
+            setName(data.name);
+            setText(data.text);
+            setConnections(data.topic?.map((topic) => topic.id) || []);
+        }
+    }, [data]);
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label htmlFor="name">Name:</label>
-        <input
-          type="text"
-          id="name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="text">Text:</label>
-        <textarea
-          id="text"
-          value={text}
-          onChange={(e) => setText(e.target.value)}
-        />
-      </div>
-      <div>
-        <Topics id={id}/>
-      </div>
-      <button type="submit">Submit</button>
-    </form>
-  );
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <div>
+                <label htmlFor="name">Name:</label>
+                <input
+                    type="text"
+                    id="name"
+                    disabled={isLoading || isMutating}
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+            </div>
+            <div>
+                <label htmlFor="text">Text:</label>
+                <textarea
+                    id="text"
+                    disabled={isLoading || isMutating}
+                    value={text}
+                    onChange={(e) => setText(e.target.value)}
+                />
+            </div>
+            <div>
+                <Topics connections={connections} setConnections={setConnections}/>
+            </div>
+            <button type="submit" disabled={isLoading || isMutating}>
+                Submit
+            </button>
+        </form>
+    );
 };
 
 export default ArticleForm;

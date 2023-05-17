@@ -6,8 +6,8 @@ type Props = {
     setConnections: Dispatch<SetStateAction<number[]>>
 };
 
-const Topics: React.FC<Props> = ({ connections, setConnections }) => {
-    const { data, error, isLoading } = useSWR<Topic[]>('/api/topic');
+const Articles: React.FC<Props> = ({ connections, setConnections }) => {
+    const { data, error, isLoading } = useSWR<Article[]>('/api/article');
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const topicId = Number(event.target.value);
@@ -20,19 +20,19 @@ const Topics: React.FC<Props> = ({ connections, setConnections }) => {
 
     return (
         <div>
-            {data?.map((topic) => (
-                <label key={topic.id}>
+            {data?.map((el) => (
+                <label key={el.id}>
                 <input
                     type="checkbox"
-                    value={topic.id}
-                    checked={connections.includes(topic.id)}
+                    value={el.id}
+                    checked={connections.includes(el.id)}
                     onChange={handleCheckboxChange}
                 />
-                    {topic.name}
+                    {el.name}
                 </label>
             ))}
         </div>
     );
 };
 
-export default Topics;
+export default Articles;
