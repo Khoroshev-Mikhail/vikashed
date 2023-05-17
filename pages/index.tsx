@@ -15,7 +15,7 @@ interface Article {
 const TopicList: React.FC = () => {
   const [topics, setTopics] = useState<Topic[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
-
+  //swr
   useEffect(() => {
     fetch('/api/topic/')
       .then((response) => response.json())
