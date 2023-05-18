@@ -1,5 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import prisma from '../../../lib/prisma';
+import { getServerSession } from 'next-auth';
+import { authOptions } from "../auth/[...nextauth]"
 
 export interface ReqBodyPutArticle {
     name: string;
@@ -33,7 +35,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(500).json({ message: 'Internal Server Error' });
         }
     } else if (req.method === 'PUT') {
-
+        const session = await getServerSession(req, res, authOptions)
+        if(!session?.user){
+            return res.status(401)
+        }
         const { name, text, topic }: ReqBodyPutArticle = JSON.parse(req.body)
 
         try {

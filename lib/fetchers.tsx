@@ -5,7 +5,7 @@ export async function createFetch(url: string, { arg }: { arg: any }): Promise<a
     });
   }
   
-export async function updateFetch(url: string, { arg }: { arg: any }): Promise<any> {
+  export async function updateFetch(url: string, { arg }: { arg: any }): Promise<any> {
     await fetch(url, {
         method: 'PUT',
         body: JSON.stringify(arg),

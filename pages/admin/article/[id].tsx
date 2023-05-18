@@ -16,12 +16,12 @@ const ArticleForm = () => {
     const [connections, setConnections] = useState<number[]>([]);
 
     const { data, error, isLoading } = useSWR<ArticleWithConnections>(id ? `/api/article/${id}` : null)
-    const { trigger, isMutating } = useSWRMutation(`/api/article/${id}`, updateFetch)
+    const { trigger, isMutating } = useSWRMutation<any, any, any, ReqBodyPutArticle>(`/api/article/${id}`, updateFetch)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         try {
-            trigger({ name, text, topic: connections } as ReqBodyPutArticle)
+            trigger({ name, text, topic: connections })
         } catch (error) {
             console.error('Error updating article:', error);
         }

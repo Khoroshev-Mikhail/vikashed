@@ -1,41 +1,21 @@
+import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-
-interface Topic {
-  id: number;
-  name: string;
-}
-
-interface Article {
-  id: number;
-  name: string;
-  topic: Topic[];
-}
+import useSWR from 'swr'
 
 const TopicList: React.FC = () => {
-  const [topics, setTopics] = useState<Topic[]>([]);
-  const [articles, setArticles] = useState<Article[]>([]);
-  //swr
-  useEffect(() => {
-    fetch('/api/topic/')
-      .then((response) => response.json())
-      .then((data) => setTopics(data))
-      .catch((error) => console.error('Error fetching topics:', error));
+  const { data: articles } = useSWR<ArticleWithConnections[]>(`/api/article/`)
+  const { data: topics } = useSWR<TopicWithConnections[]>(`/api/topic/`)
+  const { data: session, status } = useSession()
 
-    fetch('/api/article/')
-      .then((response) => response.json())
-      .then((data) => setArticles(data))
-      .catch((error) => console.error('Error fetching articles:', error));
-  }, []);
 
   return (
     <div>
-    {topics.length > 0 ? (
+    {topics && topics.length > 0 ? (
       topics.map((topic) => (
         <div key={topic.id}>
           <h2 className="text-4xl font-bold border-b">{topic.name}</h2>
           <ul className="text-lg">
-            {articles
+            {articles && articles
               .filter((article) =>
                 article.topic.some((topicItem) => topicItem.id === topic.id)
               )
@@ -52,6 +32,9 @@ const TopicList: React.FC = () => {
     ) : (
       <p>No topics available</p>
     )}
+    <button onClick={()=>signIn()}>sign in</button>
+    <button onClick={()=>signOut()}>sign out</button>
+    <div>{session ? `auth ${session.user.name}` : 'anAuth'}</div>
   </div>
 
   );
