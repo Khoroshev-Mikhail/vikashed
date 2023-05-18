@@ -1,3 +1,4 @@
+import Nav from '@/components/01Nav';
 import { signIn, signOut, useSession } from 'next-auth/react';
 import Link from 'next/link';
 import useSWR from 'swr'
@@ -10,6 +11,7 @@ const TopicList: React.FC = () => {
 
   return (
     <div>
+      <Nav />
     {topics && topics.length > 0 ? (
       topics.map((topic) => (
         <div key={topic.id}>
