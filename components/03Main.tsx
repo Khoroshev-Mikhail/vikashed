@@ -7,7 +7,7 @@ export default function Main(){
     const { data } = useSWR<TopicWithConnections[]>(`/api/topic/`)
 
     return(
-        <section className="w-full px-5">
+        <section className="w-full px-5 flex-grow">
             <div className="w-full">
                 <input type="text" className="w-full p-2 rounded-md font-bold text-[15px] bg-[#F2F2F2]" placeholder="Поиск статей..."/>
             </div>
