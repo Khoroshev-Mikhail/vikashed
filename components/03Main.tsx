@@ -14,9 +14,6 @@ export default function Main(){
 
             <div>
                 {data && data.map(topic => <Topic_block name={topic.name} article={topic.article}/>)}
-
-                
-
             </div>
         </section>
     )
