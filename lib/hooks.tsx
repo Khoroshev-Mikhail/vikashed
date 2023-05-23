@@ -37,3 +37,17 @@ export const useConsole = (value: any) => {
         console.log(value)
     }, [value])
 }
+export function formatDate(str: string) {
+  const date = new Date(str)
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  return `${day}/${month}`;
+}
+export function calcReadTime(str: string) {
+  const length = str.length;
+  if (length > 0) {
+    const result = Math.ceil(length / 800);
+    return result;
+  }
+  return 1;
+}

@@ -17,6 +17,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             id: true,
                             name: true,
                             text: true,
+                            date: true,
+                            author: {
+                                select: {
+                                    name: true,
+                                    role: true,
+                                    image: true,
+                                }
+                            }
                         },
                     },
                 },
@@ -31,9 +39,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         const session = await getServerSession(req, res, authOptions);
         if (!session) {
-            return res.status(401)
+            return res.status(401).json({ message: 'Unauthorized.' })
         }
-        const { name }: ReqBodyPostTopic = JSON.parse(req.body);
+        const { name }: ReqBodyPostTopic = req.body;
         try {
             const createdTopic = await prisma.topic.create({
                 data: {

@@ -32,14 +32,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method === 'POST') {
         const session = await getServerSession(req, res, authOptions)
         if(!session){
-            return res.status(401)
+            return res.status(401).json({ message: 'Unauthorized.' })
         }
         const { name, text, topics }: ReqBodyPostArticle = JSON.parse(req.body);
         try {
             const createdArticle = await prisma.article.create({
                 data: {
-                    name: name,
-                    text: text,
+                    name,
+                    text,
+                    authorId: session.user.id as string,
                     topic: {
                         connect: topics.map((id) => ({ id })),
                     },

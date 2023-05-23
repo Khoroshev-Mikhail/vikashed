@@ -1,3 +1,5 @@
+
+
 interface Topic {
     id: number
     name: string
@@ -11,7 +13,14 @@ interface TopicWithConnections {
 interface Article {
     id: number;
     name: string;
+    date: string;
+    authorId: string;
     text: string; // |JSON
+    author: {
+        name?: string;
+        role?: string;
+        image?: string
+    }
 };
 interface ArticleWithConnections {
     id: number;

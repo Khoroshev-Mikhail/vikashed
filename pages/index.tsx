@@ -15,6 +15,9 @@ const TopicList: React.FC = () => {
 
             <Nav />
             <Main />
+            <button onClick={()=>signIn()}>sign in</button>
+            <button onClick={()=>signOut()}>sign out</button>
+            <div>{session ? `auth ${session.user.name}` : 'anAuth'}</div>
         {/* 
             {topics && topics.length > 0 ? (
             topics.map((topic) => (
