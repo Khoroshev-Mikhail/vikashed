@@ -51,3 +51,12 @@ export function calcReadTime(str: string) {
   }
   return 1;
 }
+export function getArticleWord(number: number) {
+  if (number === 1) {
+    return number + " статья";
+  } else if (number >= 2 && number <= 4) {
+    return number + " статьи";
+  } else {
+    return number + " статей";
+  }
+}
