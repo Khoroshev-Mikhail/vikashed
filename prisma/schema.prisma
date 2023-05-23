@@ -10,6 +10,24 @@ datasource db {
   shadowDatabaseUrl = env("POSTGRES_URL_NON_POOLING") // used for migrations
 }
 
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  accounts      Account[]
+  sessions      Session[]
+  articles      Article[]
+  role          Role @default(USER)
+}
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -28,26 +46,6 @@ model Account {
 
   @@unique([provider, providerAccountId])
 }
-
-model Session {
-  id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
-  expires      DateTime
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  role          Role @default(USER)
-}
-
 model VerificationToken {
   identifier String
   token      String   @unique
@@ -62,10 +60,13 @@ enum Role {
 }
 
 model Article {
-  id       Int    @id @default(autoincrement())
-  name     String
-  text     Json
-  topic    Topic[]
+  id           Int    @id @default(autoincrement())
+  name         String
+  text         Json
+  date         DateTime @default(now())
+  author       User @relation(fields: [authorId], references: [id])
+  authorId     String
+  topic        Topic[]
 }
 
 

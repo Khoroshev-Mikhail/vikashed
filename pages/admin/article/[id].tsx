@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr'
-import Topics from '@/components/admin/article/Topics';
+import Topics from '@/components/admin/article/Topics_admin';
 import useSWRMutation from 'swr/mutation'
 import { updateFetch } from '@/lib/fetchers';
 import { ReqBodyPutArticle } from '@/pages/api/article/[id]';

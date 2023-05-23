@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import useSWR from 'swr'
 import useSWRMutation from 'swr/mutation'
 import { updateFetch } from '@/lib/fetchers';
-import Articles from '@/components/admin/article/Articles';
+import Articles from '@/components/admin/article/Articles_admin';
 
 
 const TopicForm = () => {

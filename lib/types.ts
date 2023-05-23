@@ -5,16 +5,13 @@ interface Topic {
 interface TopicWithConnections {
     id: number
     name: string
-    article: {
-        id: number
-        name: string
-    }[]
+    article: Article[]
 }
 
 interface Article {
     id: number;
     name: string;
-    text: string;
+    text: string; // |JSON
 };
 interface ArticleWithConnections {
     id: number;
