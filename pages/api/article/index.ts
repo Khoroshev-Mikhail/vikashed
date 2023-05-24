@@ -31,9 +31,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'POST') {
         const session = await getServerSession(req, res, authOptions)
-        if(!session){
-            return res.status(401).json({ message: 'Unauthorized.' })
+        if(session?.user.role !== 'ADMIN'){
+            return res.status(401).json({ message: "Admin only."})
         }
+        
         const { name, text, topics }: ReqBodyPostArticle = JSON.parse(req.body);
         try {
             const createdArticle = await prisma.article.create({

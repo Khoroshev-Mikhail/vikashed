@@ -66,5 +66,5 @@ const ArticleForm = () => {
         </form>
     );
 };
-
+ArticleForm.admin = true
 export default ArticleForm;

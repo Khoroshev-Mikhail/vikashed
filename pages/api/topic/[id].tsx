@@ -37,8 +37,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
     } else if (req.method === 'PUT') {
         const session = await getServerSession(req, res, authOptions)
-        if(!session){
-            return res.status(401)
+        if(session?.user.role !== 'ADMIN'){
+            return res.status(401).json({ message: "Admin only."})
         }
         const { name, connections }: ReqBodyPutTopic = JSON.parse(req.body);
 

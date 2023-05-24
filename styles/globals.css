@@ -2,3 +2,30 @@
 @tailwind components;
 @tailwind utilities;
 
+._a-reset{
+    @apply no-underline text-black;
+}
+
+/* Эти стили указаны для парсинга html иначе тайлвинд их перекрывает */
+ul, ol {
+    margin-left: 40px;
+}
+ul{
+    list-style-type: circle;
+}
+ol{
+    list-style-type: decimal;
+}
+h1 {
+    font-size: 1.5rem !important;
+}
+h2 {
+    font-size: 1.3rem;
+}
+h3 {
+    font-size: 1.2rem;
+}
+a {
+    color: blue;
+    text-decoration: underline;
+}

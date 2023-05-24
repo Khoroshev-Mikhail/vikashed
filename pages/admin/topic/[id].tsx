@@ -53,5 +53,5 @@ const TopicForm = () => {
         </form>
     );
 };
-
+TopicForm.admin = true
 export default TopicForm;

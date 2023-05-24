@@ -1,6 +1,6 @@
 import React, { useState, ChangeEvent, FormEvent } from 'react';
 
-const TopicForm: React.FC = () => {
+const TopicForm = () => {
   const [name, setName] = useState('');
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -54,5 +54,5 @@ const TopicForm: React.FC = () => {
     </form>
   );
 };
-
+TopicForm.admin = true
 export default TopicForm;
