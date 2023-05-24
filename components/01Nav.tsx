@@ -10,7 +10,7 @@ export default function Nav(){
     const [ isOpen, setIsOpen ] = useState<boolean>(false)
 
     return (
-        <div className="w-full">
+        <div className="w-full border-b border-black">
             <div className="p-5 flex justify-between">
                 <h1 className="font-bold text-2xl">
                     <Link href="/" className="_a-reset">Практика психолога</Link>

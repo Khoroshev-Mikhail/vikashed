@@ -9,9 +9,13 @@ export default function Footer(){
             <div className="leading-[40px]">
                 Практика психолога
             </div>
-            <div className="flex justify-center ">
-                <Link href={'https://t.me/Vika_Shed'}><Image src={telegram} alt="instagram"/></Link>
-                <Link href={'https://t.me/Vika_Shed'}><Image src={instagram} alt="instagram"/></Link>
+            <div className="flex justify-center gap-x-1">
+                <Link href={'https://t.me/Vika_Shed'}>
+                    <Image src={telegram} alt="instagram"/>
+                </Link>
+                <Link href={'https://t.me/Vika_Shed'}>
+                    <Image src={instagram} alt="instagram"/>
+                </Link>
             </div>
         </footer>
     )
