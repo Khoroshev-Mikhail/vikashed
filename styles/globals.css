@@ -18,12 +18,15 @@ ol{
 }
 h1 {
     font-size: 1.5rem !important;
+    font-weight: 700;
 }
 h2 {
     font-size: 1.3rem;
+    font-weight: 700;
 }
 h3 {
     font-size: 1.2rem;
+    font-weight: 700;
 }
 a {
     color: blue;

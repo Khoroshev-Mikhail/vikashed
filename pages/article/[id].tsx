@@ -17,9 +17,9 @@ const Article: React.FC = () => {
   return (
     //breadcrumbs
     <>{data && 
-        <div className='px-5'>
-            <h2>{data.name}</h2>
-            <div>
+        <div className='px-5 w-full'>
+            <h1 className='w-full border-b pb-2'>{data.name}</h1>
+            <div className='mt-2'>
                 {parse(data.text)}
             </div>
         </div>

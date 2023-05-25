@@ -20,7 +20,7 @@ export default function Topic_block({ id, name, article } : TopicWithConnections
             
             {article.map((el, i) => {
                 return (
-                    <Link key={i} href={`/article/${id}`} className={ `${isOpen ? 'flex' : 'hidden' } _a-reset flex-col text-xs border-b py-5 pl-2 `}>
+                    <Link key={i} href={`/article/${el.id}`} className={ `${isOpen ? 'flex' : 'hidden' } _a-reset flex-col text-xs border-b py-5 pl-2 `}>
                         {/* <div className="font-medium flex text-xs">
                             <Image src={ el.author.image || user_avatar } alt="Ава" width={24} height={24} className='rounded-full'/>
                             <span className='leading-6 pl-1'> { el.author.name } </span> 
@@ -29,18 +29,17 @@ export default function Topic_block({ id, name, article } : TopicWithConnections
                         <div className="text-lg">
                             { el.name }
                         </div>
-                        <div className="mt-2 text-sm">
+                        {/* <div className="mt-2 text-sm">
                             { parse(el.text) } 
-                            {/* здесь будут заголовки их надо скрыть или для статьи отдельно заводить превью */}
-                        </div>
-                        <div className="mt-1.5 text-xs text-[#999] flex justify-between">
+                        </div> */}
+                        {/* <div className="mt-1.5 text-xs text-[#999] flex justify-between">
                             <div>
                                 { formatDate(el.date) }
                             </div>
                             <div>
-                                { calcReadTime(el.text) } мин {/* или комментарии 0 */}
+                                { calcReadTime(el.text) } мин 
                             </div>
-                        </div>
+                        </div> */}
                     </Link>
                 )
             })}

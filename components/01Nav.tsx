@@ -12,19 +12,19 @@ export default function Nav(){
     return (
         <div className="w-full border-b border-black">
             <div className="p-5 flex justify-between">
-                <h1 className="font-bold text-2xl">
+                <h1 className="font-bold text-3xl">
                     <Link href="/" className="_a-reset">Практика психолога</Link>
                 </h1>
                 <Image src={burger} alt="open menu" onClick={()=>setIsOpen(true)}/>
             </div>
 
             <div className={`${isOpen ? 'block' : 'hidden'} text-xl absolute w-full text-right top-0 right-0 p-5  bg-black text-white `}>
-                <nav className="text-white">
+                <nav className="text-white" onClick={()=>setIsOpen(false)}>
 
 
                     <menu>
                         <li className="flex justify-end">
-                            <Image src={cross} alt="close menu" onClick={()=>setIsOpen(false)}/>
+                            <Image src={cross} alt="close menu"/>
                         </li>
 
                         <li>

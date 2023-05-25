@@ -66,6 +66,7 @@ model Article {
   date         DateTime @default(now())
   author       User @relation(fields: [authorId], references: [id])
   authorId     String
+  isPaid       Boolean @default(false)
   topic        Topic[]
 }
 

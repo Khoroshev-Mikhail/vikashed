@@ -10,7 +10,7 @@ export default function Main(){
             <div className="w-full">
                 <input type="text" className="w-full p-2 rounded-md font-bold text-[15px] bg-[#F2F2F2]" placeholder="Поиск статей..."/>
             </div>
-ss
+
             <div>
                 {data && data.map(topic => <Topic_block id={topic.id} name={topic.name} article={topic.article}/>)}
             </div>

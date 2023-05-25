@@ -7,6 +7,25 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
+const formats = [
+    'header',
+    'bold',
+    'italic',
+    'underline',
+    'list',
+    'bullet',
+    'indent',
+    'link',
+  ];
+  
+  const modules = {
+    toolbar: [
+      [{ header: [2, 3, false] }],
+      ['bold', 'italic', 'underline', 'link'],
+      [{ list: 'ordered' }, { list: 'bullet' }],
+    ],
+  };
+
 const ArticleForm = () => {
     const [name, setName] = useState('');
     const [text, setText] = useState('');
@@ -52,7 +71,7 @@ const ArticleForm = () => {
                     <label htmlFor="text" className="block mb-2 font-medium">
                         Тело статьи:
                     </label>
-                    <ReactQuill id="text" theme="snow" value={text} onChange={handleTextChange} />
+                    <ReactQuill id="text" theme="snow" value={text} onChange={handleTextChange} formats={formats} modules={modules} />
                 </div>
 
                 <div>
