@@ -3,9 +3,11 @@ import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "../auth/[...nextauth]"
 
-export interface ReqBodyPostArticle {
+export interface ReqBodyArticle {
     name: string;
     text: string;
+    isVisible: boolean;
+    isPaid: boolean;
     topics: number[];
 }
 
@@ -35,13 +37,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(401).json({ message: "Admin only."})
         }
         
-        const { name, text, topics }: ReqBodyPostArticle = JSON.parse(req.body);
+        const { name, text, topics }: ReqBodyArticle = JSON.parse(req.body);
         try {
             const createdArticle = await prisma.article.create({
                 data: {
                     name,
                     text,
-                    authorId: session.user.id as string,
                     topic: {
                         connect: topics.map((id) => ({ id })),
                     },

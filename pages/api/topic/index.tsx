@@ -18,13 +18,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                             name: true,
                             text: true,
                             date: true,
-                            author: {
-                                select: {
-                                    name: true,
-                                    role: true,
-                                    image: true,
-                                }
-                            }
+                            isPaid: true,
+                            isVisible: true
                         },
                     },
                 },

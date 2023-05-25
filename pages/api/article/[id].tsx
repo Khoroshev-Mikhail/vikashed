@@ -6,6 +6,8 @@ import { authOptions } from "../auth/[...nextauth]"
 export interface ReqBodyPutArticle {
     name: string;
     text: string;
+    isVisible: boolean;
+    isPaid: boolean;
     topic: number[];
 }
 
@@ -39,7 +41,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if(session?.user.role !== 'ADMIN'){
             return res.status(401).json({ message: "Admin only."})
         }
-        const { name, text, topic }: ReqBodyPutArticle = JSON.parse(req.body)
+        const { name, text, topic, isVisible, isPaid }: ReqBodyPutArticle = JSON.parse(req.body)
 
         try {
             const article = await prisma.article.findUnique({
@@ -58,6 +60,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 data: {
                     name: name,
                     text: text,
+                    isVisible,
+                    isPaid,
                     topic: {
                         set: topic.map(topicId => ({ id: topicId })),
                         disconnect: topicToRemove.map(topicId => ({ id: topicId })),

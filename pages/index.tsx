@@ -22,7 +22,7 @@ const TopicList = ({ propsData }: InferGetStaticPropsType<typeof getStaticProps>
           </div>
 
           <div>
-              {data && data.map((topic, i) => <Topic_block key={i} id={topic.id} name={topic.name} article={topic.article}/>)}
+              { data && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} id={topic.id} name={topic.name} article={topic.article}/>) }
           </div>
       </section>
   )

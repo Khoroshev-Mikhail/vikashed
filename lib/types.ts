@@ -14,17 +14,17 @@ interface Article {
     id: number;
     name: string;
     date: string;
-    authorId: string;
-    text: string; // |JSON
-    author: {
-        name?: string;
-        role?: string;
-        image?: string
-    }
+    text: string;
+    isVisible: boolean;
+    isPaid: boolean;
 };
 interface ArticleWithConnections {
+    //Обэедени спредыдущим
     id: number;
     name: string;
+    date: string;
     text: string;
+    isVisible: boolean;
+    isPaid: boolean;
     topic: { id: number }[];
 };

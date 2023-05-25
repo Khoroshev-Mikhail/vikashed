@@ -18,7 +18,7 @@ export default function Nav(){
                 <Image src={burger} alt="open menu" onClick={()=>setIsOpen(true)}/>
             </div>
 
-            <div className={`${isOpen ? 'block' : 'hidden'} text-xl absolute w-full text-right top-0 right-0 p-5  bg-black text-white `}>
+            <div className={`${isOpen ? 'block' : 'hidden'} text-xl absolute z-50 w-full text-right top-0 right-0 p-5  bg-black text-white `}>
                 <nav className="text-white" onClick={()=>setIsOpen(false)}>
 
 
@@ -48,7 +48,10 @@ export default function Nav(){
                                 <Link href="/admin/topic" className=" text-white no-underline">Добавиь тему</Link>
                             </li>
                             <li>
-                                <Link href="/admin/article" className=" text-white no-underline">Добавиь статью</Link>
+                                <Link href="/admin/article" className=" text-white no-underline">Добавить статью</Link>
+                            </li>
+                            <li>
+                                <Link href="/admin/users" className=" text-white no-underline">Пользователи</Link>
                             </li>
                         </menu>
                     }
