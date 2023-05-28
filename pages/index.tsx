@@ -1,13 +1,25 @@
 import Topic_block from '@/components/blocks/Topic_block';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useSWR from 'swr'
+import prisma from '../lib/prisma';
 
-export const getStaticProps: GetStaticProps<{ propsData: TopicWithConnections[] }> = async () => {
-    const res = await fetch('http://localhost:3000/api/topic/')
-    const propsData: TopicWithConnections[] = await res.json();
+export const getStaticProps: GetStaticProps = async () => {
+    const propsData = await prisma.topic.findMany({
+        include: {
+            article: {
+                select: {
+                    id: true,
+                    name: true,
+                    text: true,
+                    isPaid: true,
+                    isVisible: true
+                },
+            },
+        },
+    });
     return {
         props: {
-            propsData
+            propsData: propsData
         }
     }
 }

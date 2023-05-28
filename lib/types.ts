@@ -13,7 +13,7 @@ interface TopicWithConnections {
 interface Article {
     id: number;
     name: string;
-    date: string;
+    date?: string;
     text: string;
     isVisible: boolean;
     isPaid: boolean;
@@ -22,7 +22,7 @@ interface ArticleWithConnections {
     //Обэедени спредыдущим
     id: number;
     name: string;
-    date: string;
+    date?: string;
     text: string;
     isVisible: boolean;
     isPaid: boolean;

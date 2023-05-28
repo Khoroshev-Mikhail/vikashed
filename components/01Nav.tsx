@@ -15,7 +15,7 @@ export default function Nav(){
                 <h1 className="font-bold text-3xl">
                     <Link href="/" className="_a-reset">Практика психолога</Link>
                 </h1>
-                <Image src={burger} alt="open menu" onClick={()=>setIsOpen(true)}/>
+                <Image src={burger} width={24} height={36} alt="open menu" onClick={()=>setIsOpen(true)}/>
             </div>
 
             <div className={`${isOpen ? 'block' : 'hidden'} text-xl absolute z-50 w-full text-right top-0 right-0 p-5  bg-black text-white `}>
