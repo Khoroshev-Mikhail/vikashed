@@ -12,7 +12,6 @@ const Article: React.FC = () => {
     const { id } = router.query;
     const { data, isLoading } = useSWR<Article>(id ? `/api/article/${id}` : null)
     const { data: session } = useSession()
-
     return (
         //breadcrumbs
         <>
@@ -27,7 +26,7 @@ const Article: React.FC = () => {
 
                 <h1 className='w-full border-b pb-2 mt-4'>{data.name}</h1>
                 <div className='mt-2'>
-                    {parse(data.text)}
+                    {data?.text && parse(data.text)}
                 </div>
             </div>
         }

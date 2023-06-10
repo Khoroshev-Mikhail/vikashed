@@ -21,8 +21,8 @@ const ArticleForm = () => {
     const [isVisible, setIsVisible] = useState<boolean>(true)
     const [isPaid, setIsPaid] = useState<boolean>(false)
 
-    const { data, error, isLoading } = useSWR<ArticleWithConnections>(id ? `/api/article/${id}` : null)
-    const { trigger, isMutating, error: isMutatingError } = useSWRMutation<any, any, any, ReqBodyPutArticle>(`/api/article/${id}`, updateFetch)
+    const { data, error, isLoading } = useSWR<ArticleWithConnections>(id ? `/api/admin/article/${id}` : null)
+    const { trigger, isMutating, error: isMutatingError } = useSWRMutation<any, any, any, ReqBodyPutArticle>(`/api/admin/article/${id}`, updateFetch)
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();

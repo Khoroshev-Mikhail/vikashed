@@ -60,7 +60,7 @@ enum Role {
 }
 
 model Article {
-  id           Int    @id @default(autoincrement())
+  id           Int @id @default(autoincrement())
   name         String
   text         Json
   date         DateTime @default(now())
@@ -71,8 +71,9 @@ model Article {
 
 
 model Topic {
-  id      Int      @id @default(autoincrement())
-  name    String
-  article Article[]
+  id           Int @id @default(autoincrement())
+  name         String
+  isVisible    Boolean @default(true)
+  article      Article[]
 }
 

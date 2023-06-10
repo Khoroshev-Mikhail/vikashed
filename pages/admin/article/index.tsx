@@ -17,7 +17,7 @@ const ArticleForm = () => {
     const [connections, setConnections] = useState<number[]>([]);
     const [isVisible, setIsVisible] = useState<boolean>(true)
     const [isPaid, setIsPaid] = useState<boolean>(false)
-    const { trigger, isMutating } = useSWRMutation<any, any, any, ReqBodyArticle>(`/api/article`, createFetch)
+    const { trigger, isMutating } = useSWRMutation<any, any, any, ReqBodyArticle>(`/api/admin/article`, createFetch)
 
     const handleTextChange = (value: string) => {
         setText(value);

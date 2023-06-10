@@ -11,7 +11,7 @@ type Props = {
 };
 
 const Topics: React.FC<Props> = ({ connections, setConnections, isVisible, setIsVisible, isPaid, setIsPaid }) => {
-    const { data, error, isLoading } = useSWR<Topic[]>('/api/topic');
+    const { data, error, isLoading } = useSWR<Topic[]>('/api/admin/topic');
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const topicId = Number(event.target.value);

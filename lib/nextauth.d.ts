@@ -5,6 +5,7 @@ declare module "next-auth" {
     interface User {
         role: Role
         id: number | string
+        isPremium: boolean
     }
     interface Session extends DefaultSession {
         user: User;

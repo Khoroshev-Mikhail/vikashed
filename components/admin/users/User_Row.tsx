@@ -1,12 +1,12 @@
 import { updateFetch } from '@/lib/fetchers'
-import { ResUsers } from '@/pages/api/user'
-import { ReqBodyUser } from '@/pages/api/user/[id]'
+import { ResUsers } from '@/pages/api/admin/user'
+import { ReqBodyUser } from '@/pages/api/admin/user/[id]'
 import { useState } from 'react'
 import useSWRMutation from 'swr/mutation'
 
 export default function User_Row({ id, name, isPremium: props_isPremium } :ResUsers){
     const [isPremium, setIsPremium] = useState<boolean>(props_isPremium)
-    const { trigger, isMutating, error: isMutatingError } = useSWRMutation<any, any, any, ReqBodyUser>(`/api/user/${id}`, updateFetch)
+    const { trigger, isMutating, error: isMutatingError } = useSWRMutation<any, any, any, ReqBodyUser>(`/api/admin/user/${id}`, updateFetch)
     
     const handler = async () => {
         const result = !isPremium

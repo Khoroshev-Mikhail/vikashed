@@ -7,7 +7,7 @@ type Props = {
 };
 
 const Articles: React.FC<Props> = ({ connections, setConnections }) => {
-    const { data, error, isLoading } = useSWR<Article[]>('/api/article');
+    const { data, error, isLoading } = useSWR<Article[]>('/api/admin/article');
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const topicId = Number(event.target.value);
@@ -20,16 +20,20 @@ const Articles: React.FC<Props> = ({ connections, setConnections }) => {
 
     return (
         <div>
+            <label className="mt-2 block mb-2 font-medium">Связанные статьи:</label>
             {data?.map((el) => (
-                <label key={el.id}>
-                <input
-                    type="checkbox"
-                    value={el.id}
-                    checked={connections.includes(el.id)}
-                    onChange={handleCheckboxChange}
-                />
-                    {el.name}
-                </label>
+                <div key={el.id}>
+                    <input
+                        type="checkbox"
+                        value={el.id}
+                        checked={connections.includes(el.id)}
+                        onChange={handleCheckboxChange}
+                        id={`article-${el.id}`}
+                        className='mr-2'
+                    />
+                    <label htmlFor={`article-${el.id}`}>{el.name}</label>
+
+                </div>
             ))}
         </div>
     );

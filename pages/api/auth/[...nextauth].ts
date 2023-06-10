@@ -22,6 +22,7 @@ export const authOptions: NextAuthOptions = {
         if(user){
             session.user.role = user.role
             session.user.id = user.id
+            session.user.isPremium = user.isPremium
         }
         return session;
     },

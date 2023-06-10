@@ -3,10 +3,12 @@
 interface Topic {
     id: number
     name: string
+    isVisible: boolean
 }
 interface TopicWithConnections {
     id: number
     name: string
+    isVisible: boolean;
     article: Article[]
 }
 

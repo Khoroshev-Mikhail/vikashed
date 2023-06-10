@@ -7,8 +7,9 @@ import Layout from '@/components/layout/Layout'
 
 const fetcher = (resource: RequestInfo, init?: RequestInit) => fetch(resource, init).then(res => res.json())
 const SWRoptions = {
-    refreshInterval: 3000,
-    fetcher
+    // refreshInterval: 3000,
+    fetcher,
+    
 }
 
 export default function App({Component, pageProps: { session, ...pageProps }}: AppProps) {

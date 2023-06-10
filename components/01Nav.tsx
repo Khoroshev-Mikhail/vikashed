@@ -13,7 +13,7 @@ export default function Nav(){
         <div className="w-full border-b border-black">
             <div className="p-5 flex justify-between">
                 <h1 className="font-bold text-3xl">
-                    <Link href="/" className="_a-reset">Практика психолога</Link>
+                    <Link href="/" className="_a-reset">Логика психолога</Link>
                 </h1>
                 <Image src={burger} width={24} height={36} alt="open menu" onClick={()=>setIsOpen(true)} className="cursor-pointer"/>
             </div>
@@ -45,7 +45,7 @@ export default function Nav(){
                     {session?.user.role === 'ADMIN' &&
                         <menu className="mt-5 pt-5 border-t">
                             <li>
-                                <Link href="/admin/topic" className=" text-white no-underline">Добавиь тему</Link>
+                                <Link href="/admin/topic" className=" text-white no-underline">Добавить тему</Link>
                             </li>
                             <li>
                                 <Link href="/admin/article" className=" text-white no-underline">Добавить статью</Link>

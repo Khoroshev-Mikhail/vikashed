@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from "../auth/[...nextauth]"
+import { authOptions } from "../../auth/[...nextauth]"
 
 export interface ReqBodyArticle {
     name: string;
@@ -14,12 +14,7 @@ export interface ReqBodyArticle {
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         try {
-            const session = await getServerSession(req, res, authOptions)
             const articles = await prisma.article.findMany({
-                where: {
-                    isVisible: true,
-                    isPaid: !session?.user.isPremium ? false : undefined
-                },
                 include: {
                     topic: {
                         select: {
@@ -36,6 +31,30 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         }
     }
 
+    if (req.method === 'POST') {
+        const session = await getServerSession(req, res, authOptions)
+        if(session?.user.role !== 'ADMIN'){
+            return res.status(401).json({ message: "Admin only."})
+        }
+        
+        const { name, text, topics }: ReqBodyArticle = JSON.parse(req.body);
+        try {
+            const createdArticle = await prisma.article.create({
+                data: {
+                    name,
+                    text,
+                    topic: {
+                        connect: topics.map((id) => ({ id })),
+                    },
+                },
+            });
+
+            return res.status(201).json(createdArticle);
+        } catch (error) {
+            console.error('Error creating article:', error);
+            return res.status(500).json({ message: 'Internal Server Error' });
+        }
+    }
 
     return res.status(405).json({ message: 'Method Not Allowed' });
 }

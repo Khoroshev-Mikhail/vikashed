@@ -3,29 +3,29 @@ import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useSWR from 'swr'
 import prisma from '../lib/prisma';
 
-export const getStaticProps: GetStaticProps = async () => {
-    const propsData = await prisma.topic.findMany({
-        include: {
-            article: {
-                select: {
-                    id: true,
-                    name: true,
-                    text: true,
-                    isPaid: true,
-                    isVisible: true
-                },
-            },
-        },
-    });
-    return {
-        props: {
-            propsData: propsData
-        }
-    }
-}
+// export const getStaticProps: GetStaticProps = async () => {
+//     const propsData = await prisma.topic.findMany({
+//         include: {
+//             article: {
+//                 select: {
+//                     id: true,
+//                     name: true,
+//                     text: true,
+//                     isPaid: true,
+//                     isVisible: true
+//                 },
+//             },
+//         },
+//     });
+//     return {
+//         props: {
+//             propsData: propsData
+//         }
+//     }
+// }
 
-const TopicList = ({ propsData }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { data } = useSWR<TopicWithConnections[]>(`/api/topic/`, { fallbackData: propsData })
+const TopicList = () => {
+  const { data } = useSWR<TopicWithConnections[]>(`/api/topic/`, )
 
   return(
       <section className="w-full px-5">
@@ -34,7 +34,7 @@ const TopicList = ({ propsData }: InferGetStaticPropsType<typeof getStaticProps>
           </div>
 
           <div>
-              { data && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} id={topic.id} name={topic.name} article={topic.article}/>) }
+              { data && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} {...topic}/>) }
           </div>
       </section>
   )

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import prisma from '../../../lib/prisma';
+import prisma from '../../../../lib/prisma';
 import { getServerSession } from 'next-auth';
-import { authOptions } from "../auth/[...nextauth]"
+import { authOptions } from "../../auth/[...nextauth]"
 
 export interface ReqBodyPutArticle {
     name: string;
@@ -13,15 +13,11 @@ export interface ReqBodyPutArticle {
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
-    const session = await getServerSession(req, res, authOptions)
 
     if (req.method === 'GET') {
-        
         try {
             const article = await prisma.article.findUnique({
-                where: { 
-                    id: Number(id) 
-                },
+                where: { id: Number(id) },
                 include: {
                     topic: {
                         select: {
@@ -30,9 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                     },
                 },
             });
-            if(article?.isPaid && !session?.user.isPremium){
-                return res.status(401).json({ message: 'Premium Only' });
-            }
+
             if (!article) {
                 return res.status(404).json({ message: 'Article not found' });
             }
@@ -43,6 +37,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(500).json({ message: 'Internal Server Error' });
         }
     } else if (req.method === 'PUT') {
+        const session = await getServerSession(req, res, authOptions)
         if(session?.user.role !== 'ADMIN'){
             return res.status(401).json({ message: "Admin only."})
         }

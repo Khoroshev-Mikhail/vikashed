@@ -5,7 +5,15 @@
 ._a-reset{
     @apply no-underline text-black;
 }
-
+.ql-align-justify{
+    @apply !text-justify
+}
+.ql-align-center{
+    @apply !text-center
+}
+.ql-align-right{
+    @apply !text-right
+}
 /* Эти стили указаны для парсинга html иначе тайлвинд их перекрывает */
 ul, ol {
     margin-left: 40px;
