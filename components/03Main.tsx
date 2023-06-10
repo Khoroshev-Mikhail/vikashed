@@ -12,7 +12,7 @@ export default function Main(){
             </div>
 
             <div>
-                {data && data.map(topic => <Topic_block id={topic.id} name={topic.name} article={topic.article}/>)}
+                {data && data.map(topic => <Topic_block {...topic}/>)}
             </div>
         </section>
     )
