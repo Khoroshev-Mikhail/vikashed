@@ -1,6 +1,7 @@
 import { createFetch } from '@/lib/fetchers';
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import useSWRMutation from 'swr/mutation'
+import parse from 'html-react-parser';
 import useSWR from 'swr'
 import { ReqBodyArticle } from '@/pages/api/article';
 import 'react-quill/dist/quill.snow.css'; 
@@ -33,8 +34,8 @@ const ArticleForm = () => {
     };
 
     return (
-        <div className='px-5'>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto">
+        <div className='px-5 max-w-md mx-auto'>
+            <form onSubmit={handleSubmit} className="">
 
                 <div className="mb-4">
                     <label htmlFor="name" className="block mb-2 font-medium">
@@ -47,7 +48,21 @@ const ArticleForm = () => {
                     <label htmlFor="text" className="block mb-2 font-medium">
                         Тело статьи:
                     </label>
-                    <ReactQuill id="text" theme="snow" value={text} onChange={handleTextChange} formats={FORMATS} modules={MODULES} />
+                    <ReactQuill id="text" theme="snow" value={text} onChange={handleTextChange} formats={FORMATS} modules={MODULES}
+                      
+                        // placeholder="Введите текст..."
+                        // // Опции для загрузки изображений
+                        // onChangeImage={handleImageUpload}
+                        // modules={{
+                        //   toolbar: {
+                        //     container: '#toolbar',
+                        //     handlers: {
+                        //       image: handleImageUpload,
+                        //     },
+                        //   },
+                        // }}
+                    
+                    />
                 </div>
 
                 <Topics connections={connections} setConnections={setConnections} isVisible={isVisible} setIsVisible={setIsVisible} isPaid={isPaid} setIsPaid={setIsPaid}/>
@@ -56,6 +71,10 @@ const ArticleForm = () => {
                     Сохранить
                 </button>
             </form>
+
+            <div className='mt-5 pt-5 border-t'>
+                {parse(text)}
+            </div>
         </div>
     );
 };

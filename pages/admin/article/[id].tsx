@@ -49,6 +49,7 @@ const ArticleForm = () => {
     return (
         <div className='px-5'>
             <form onSubmit={handleSubmit} className='max-w-md mx-auto'>
+
                 {/* <button type='button' onClick={()=>setIsVisible(!isVisible)}>
                     { isVisible ? <Image src={eye_hidden} alt='Скрыть'/> : <Image src={eye} alt='Показать'/> }
                 </button> */}
@@ -77,6 +78,7 @@ const ArticleForm = () => {
                 </div>
                 
             </form>
+
         </div>
     );
 };
