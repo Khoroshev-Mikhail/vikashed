@@ -5,7 +5,7 @@ import useSWRMutation from 'swr/mutation'
 
 const TopicForm = () => {
   const [name, setName] = useState('');
-  const { trigger, isMutating } = useSWRMutation<any, any, any, ReqBodyPostTopic>(`/api/article`, createFetch)
+  const { trigger, isMutating } = useSWRMutation<any, any, any, ReqBodyPostTopic>(`/api/topic`, createFetch)
 
   const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);

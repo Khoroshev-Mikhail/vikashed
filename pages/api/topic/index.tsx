@@ -36,7 +36,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         if(session?.user.role !== 'ADMIN'){
             return res.status(401).json({ message: "Admin only."})
         }
-        const { name }: ReqBodyPostTopic = req.body;
+        const { name }: ReqBodyPostTopic = JSON.parse(req.body);
         try {
             const createdTopic = await prisma.topic.create({
                 data: {
