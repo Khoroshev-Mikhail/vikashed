@@ -10,14 +10,14 @@ export default function Topic_block({ id, name, article } : TopicWithConnections
 
     return (
         <div>
-            <div className='flex justify-between border-b py-5 cursor-pointer' onClick={()=>setIsOpen(!isOpen)}>
-                <h3>{name} <span className='pl-2 text-xs'>({ article && getArticleWord(article.length) })</span></h3>
+            <div className='flex justify-between py-1 cursor-pointer' onClick={()=>setIsOpen(!isOpen)}>
+                <h3>{name}</h3>
                 <Image src={isOpen ? up : drop} alt="drop" width={24} height={29}/>
             </div>
             
             {article.map((el, i) => {
                 return (
-                    <Link key={i} href={`/article/${el.id}`} className={ `${isOpen ? 'flex' : 'hidden' } _a-reset flex-col text-xs border-b py-5 pl-2 `}>
+                    <Link key={i} href={`/article/${el.id}`} className={ `${isOpen ? 'flex' : 'hidden' } _a-reset flex-col text-xs border-b py-1 pl-2 `}>
 
                         <div className="text-lg">
                             { el.name }
