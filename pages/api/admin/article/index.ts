@@ -37,12 +37,13 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             return res.status(401).json({ message: "Admin only."})
         }
         
-        const { name, text, topics }: ReqBodyArticle = JSON.parse(req.body);
+        const { name, text, topics, isPaid }: ReqBodyArticle = JSON.parse(req.body);
         try {
             const createdArticle = await prisma.article.create({
                 data: {
                     name,
                     text,
+                    isPaid,
                     topic: {
                         connect: topics.map((id) => ({ id })),
                     },

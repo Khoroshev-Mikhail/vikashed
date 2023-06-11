@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useSWR from 'swr'
-import Topics from '@/components/admin/article/Topics_admin';
+import Topics_admin from '@/components/admin/article/Topics_admin';
 import useSWRMutation from 'swr/mutation'
 import { updateFetch } from '@/lib/fetchers';
 import { ReqBodyPutArticle } from '@/pages/api/article/[id]';
@@ -68,7 +68,7 @@ const ArticleForm = () => {
                 </div>
 
                 <div>
-                    <Topics connections={connections} setConnections={setConnections} isVisible={isVisible} setIsVisible={setIsVisible} isPaid={isPaid} setIsPaid={setIsPaid} />
+                    <Topics_admin connections={connections} setConnections={setConnections} isVisible={isVisible} setIsVisible={setIsVisible} isPaid={isPaid} setIsPaid={setIsPaid} />
                 </div>
                 
                 <div className='flex gap-x-2'>

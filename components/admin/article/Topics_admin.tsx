@@ -10,7 +10,7 @@ type Props = {
     setIsPaid: Dispatch<SetStateAction<boolean>>
 };
 
-const Topics: React.FC<Props> = ({ connections, setConnections, isVisible, setIsVisible, isPaid, setIsPaid }) => {
+const Topics_admin: React.FC<Props> = ({ connections, setConnections, isVisible, setIsVisible, isPaid, setIsPaid }) => {
     const { data, error, isLoading } = useSWR<Topic[]>('/api/admin/topic');
 
     const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -56,4 +56,4 @@ const Topics: React.FC<Props> = ({ connections, setConnections, isVisible, setIs
     );
 };
 
-export default Topics;
+export default Topics_admin;
