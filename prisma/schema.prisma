@@ -1,6 +1,6 @@
 generator client {
   provider        = "prisma-client-js"
-  previewFeatures = ["jsonProtocol"]
+  previewFeatures = ["jsonProtocol", "fullTextSearch"]
 }
 
 datasource db {
@@ -62,7 +62,7 @@ enum Role {
 model Article {
   id           Int @id @default(autoincrement())
   name         String
-  text         Json
+  text         String
   date         DateTime @default(now())
   isPaid       Boolean @default(false)
   isVisible    Boolean @default(true)

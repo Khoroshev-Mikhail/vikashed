@@ -12,6 +12,7 @@ export interface ReqBodyArticle {
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    const { string } = req.query
     if (req.method === 'GET') {
         try {
             const session = await getServerSession(req, res, authOptions)
@@ -19,7 +20,9 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 where: {
                     isVisible: session?.user.role !== 'ADMIN' ? true : undefined, //если пользовательно не админ, то не видно
                     isPaid: !session?.user.isPremium ? false : undefined, //если пользователь не премиум тогда показываем только те где доступ к статье не платный
-
+                    text: {
+                        contains: typeof string === 'string' ? string : undefined
+                    }
                 },
                 include: {
                     topic: {

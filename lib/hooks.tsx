@@ -60,3 +60,21 @@ export function getArticleWord(number: number) {
     return number + " статей";
   }
 }
+
+// export function getListIdx(str: string, substr: string): string[] {
+//   let listIdx = []
+//   let lastIndex = -1
+//   while ((lastIndex = str.indexOf(substr, lastIndex + 1)) !== -1) {
+//     listIdx.push(lastIndex)
+//   }
+//   const result = []
+//   for(let i = 0; i < listIdx.length; i++){
+//     let start = ''
+//     let end = ''
+//     if(listIdx[i] < 30){
+//       start = str[0]
+//     }
+//   }
+//   return listIdx
+// }
+// getListIdx('abc bca abcabc cba', 'abc') // [ 0, 8, 11 ]

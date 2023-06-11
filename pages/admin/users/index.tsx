@@ -8,7 +8,7 @@ export default function User(){
 
     return(
         <div className=''>
-            {data && data.map(el => {
+            {data && data?.map(el => {
                 return (
                     <User_Row {...el} />
                 )

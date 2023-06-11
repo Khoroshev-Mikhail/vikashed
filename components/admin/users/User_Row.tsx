@@ -1,3 +1,4 @@
+import Spinner from '@/components/ui/Spinner'
 import { updateFetch } from '@/lib/fetchers'
 import { ResUsers } from '@/pages/api/admin/user'
 import { ReqBodyUser } from '@/pages/api/admin/user/[id]'
@@ -11,7 +12,7 @@ export default function User_Row({ id, name, isPremium: props_isPremium } :ResUs
     const handler = async () => {
         const result = !isPremium
         setIsPremium(result)
-        trigger({ id, isPremium: result })
+        await trigger({ id, isPremium: result })
     }
 
     return(
@@ -20,11 +21,11 @@ export default function User_Row({ id, name, isPremium: props_isPremium } :ResUs
                 <div className=''>{name}</div>
             </div>
             <div>
-                <button 
-                    onClick={handler}
-                    className={`${isPremium ? 'bg-green-400' : 'bg-red-400'} border-black border-2 p-2 rounded-xl`}
-                >
-                    {isPremium ? 'Оплачен' : 'Неоплачен'}
+                <button onClick={handler} className={`${isPremium ? 'bg-green-400' : 'bg-red-400'} w-32 border-black border-2 p-2 rounded-xl`}>
+                    { isMutating 
+                        ? <Spinner />
+                        : isPremium ? 'Оплачен' : 'Неоплачен'
+                    }
                 </button>
             </div>
         </div>

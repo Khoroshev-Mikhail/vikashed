@@ -8,7 +8,7 @@ export default function Footer(){
     return(
         <footer className="flex justify-between text-center mt-5 p-5 border-t border-black">
             <div className="leading-[40px]">
-                Практика психолога
+                Логика психолога
             </div>
             <div className="flex justify-center gap-x-1">
                 <Link href={'https://t.me/Vika_Shed'}>

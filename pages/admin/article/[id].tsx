@@ -73,7 +73,7 @@ const ArticleForm = () => {
                 </div>
                 
                 <div className='flex gap-x-2'>
-                    <button type="submit" className="px-4 py-2 bg-black text-white rounded-md" disabled={isLoading || isMutating} >
+                    <button type="submit" className="w-32 px-4 py-2 bg-black text-white rounded-md" disabled={isLoading || isMutating} >
                         { (isLoading || isMutating) ? <Spinner white /> : 'Сохранить' }
                     </button>
                 </div>

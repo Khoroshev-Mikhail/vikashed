@@ -1,40 +1,31 @@
+import Search from '@/components/blocks/Search';
 import Topic_block from '@/components/blocks/Topic_block';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import useSWR from 'swr'
-import prisma from '../lib/prisma';
 
 // export const getStaticProps: GetStaticProps = async () => {
-//     const propsData = await prisma.topic.findMany({
-//         include: {
-//             article: {
-//                 select: {
-//                     id: true,
-//                     name: true,
-//                     text: true,
-//                     isPaid: true,
-//                     isVisible: true
-//                 },
-//             },
-//         },
-//     });
+//     const res = await fetch(`https://www.psiho-logika.ru/api/topic`)
+//     const propsData = await res.json()
 //     return {
 //         props: {
 //             propsData: propsData
 //         }
 //     }
 // }
+// const TopicList = ({ propsData }: InferGetStaticPropsType<typeof getStaticProps>) => {
+//     const { data } = useSWR<TopicWithConnections[]>(`/api/topic`, {fallbackData: propsData})
+
+//ЗДЕСЬ НАДО ПЕРЕПИСАТЬ ТАК, ЧТОБЫ ПОЛУЧАТЬ ВСЕ СТАТЬИ, А ПОТОМ ОТОБРАЖАТЬ ИХ В ЗАВИСИМОСТИ ОТ ВИДИМОСТИ ЮЗЕРА
 
 const TopicList = () => {
-  const { data } = useSWR<TopicWithConnections[]>(`/api/topic/`, )
+  const { data } = useSWR<TopicWithConnections[]>(`/api/topic`)
 
   return(
       <section className="w-full px-5">
-          <div className="w-full">
-              <input type="text" className="w-full p-2 rounded-md font-bold text-[15px] bg-[#F2F2F2]" placeholder="Поиск статей..."/>
-          </div>
+            {/* <Search /> */}
 
           <div>
-              { data && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} {...topic}/>) }
+              { data && data.length > 0 && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} {...topic}/>) }
           </div>
       </section>
   )
