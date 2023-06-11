@@ -16,7 +16,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         select: {
                             id: true,
                             name: true,
-                            text: true,
                             date: true,
                             isPaid: true,
                             isVisible: true

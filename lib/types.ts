@@ -9,7 +9,13 @@ interface TopicWithConnections {
     id: number
     name: string
     isVisible: boolean;
-    article: Article[]
+    article: {
+        id: number;
+        name: string;
+        date?: string;
+        isVisible: boolean;
+        isPaid: boolean;
+    }[]
 }
 
 interface Article {

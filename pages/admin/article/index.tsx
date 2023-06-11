@@ -8,6 +8,7 @@ import 'react-quill/dist/quill.snow.css';
 import dynamic from 'next/dynamic';
 import { FORMATS, MODULES } from '@/lib/consts';
 import Topics from '@/components/admin/article/Topics_admin';
+import Spinner from '@/components/ui/Spinner';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 
 
@@ -67,8 +68,8 @@ const ArticleForm = () => {
 
                 <Topics connections={connections} setConnections={setConnections} isVisible={isVisible} setIsVisible={setIsVisible} isPaid={isPaid} setIsPaid={setIsPaid}/>
 
-                <button type="submit" className="px-4 py-2 bg-black text-white rounded-md hover:bg-blue-600" >
-                    Сохранить
+                <button type="submit" className="w-40 px-4 py-2 bg-black text-white rounded-md hover:bg-blue-600" >
+                    { isMutating ? <Spinner white /> : 'Добавить новую статью' }
                 </button>
             </form>
 

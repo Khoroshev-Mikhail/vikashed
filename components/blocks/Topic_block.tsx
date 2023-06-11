@@ -17,12 +17,9 @@ export default function Topic_block({ id, name, article } : TopicWithConnections
             
             {article.map((el, i) => {
                 return (
-                    <Link key={i} href={`/article/${el.id}`} className={ `${isOpen ? 'flex' : 'hidden' } _a-reset flex-col text-xs border-b py-1 pl-2 `}>
 
-                        <div className="text-lg">
+                    <Link key={i} href={`/article/${el.id}`} className={ `${isOpen ? 'flex' : 'hidden' } ${!el.isVisible && 'bg-red-500'} _a-reset flex-col text-lg border-b py-1 pl-2 ml-2 `}>
                             { el.name }
-                        </div>
-
                     </Link>
                 )
             })}

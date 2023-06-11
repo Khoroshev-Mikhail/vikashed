@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import { FORMATS, MODULES } from '@/lib/consts';
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
 import 'react-quill/dist/quill.snow.css'; 
+import Spinner from '@/components/ui/Spinner';
 
 
 const ArticleForm = () => {
@@ -73,7 +74,7 @@ const ArticleForm = () => {
                 
                 <div className='flex gap-x-2'>
                     <button type="submit" className="px-4 py-2 bg-black text-white rounded-md" disabled={isLoading || isMutating} >
-                        Сохранить
+                        { (isLoading || isMutating) ? <Spinner white /> : 'Сохранить' }
                     </button>
                 </div>
                 
