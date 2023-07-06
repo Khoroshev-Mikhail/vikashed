@@ -10,6 +10,11 @@ export interface ReqBodyArticle {
     isPaid: boolean;
     topics: number[];
 }
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
@@ -19,9 +24,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                 where: {
                     isVisible: session?.user.role !== 'ADMIN' ? true : undefined, //если пользовательно не админ, то не видно
                     isPaid: !session?.user.isPremium ? false : undefined, //если пользователь не премиум тогда показываем только те где доступ к статье не платный
-
                 },
-                include: {
+                select: {
+                    name: true,
+                    isVisible: true,
+                    isPaid: true,
+                    text: true,
                     topic: {
                         select: {
                             id: true,

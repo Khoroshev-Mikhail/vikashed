@@ -10,7 +10,11 @@ export interface ReqBodyPutArticle {
     isPaid: boolean;
     topic: number[];
 }
-
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { id } = req.query;
 

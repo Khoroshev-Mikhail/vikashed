@@ -3,6 +3,12 @@ import prisma from '../../../lib/prisma';
 import { getServerSession } from 'next-auth';
 import { authOptions } from "../auth/[...nextauth]"
 
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
+
 export interface ReqBodyPutArticle {
     name: string;
     text: string;

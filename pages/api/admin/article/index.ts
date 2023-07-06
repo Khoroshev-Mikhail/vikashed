@@ -10,12 +10,21 @@ export interface ReqBodyArticle {
     isPaid: boolean;
     topics: number[];
 }
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'GET') {
         try {
             const articles = await prisma.article.findMany({
-                include: {
+                select: {
+                    name: true,
+                    isVisible: true,
+                    isPaid: true,
+                    text: true,
                     topic: {
                         select: {
                             id: true,

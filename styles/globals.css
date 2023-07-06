@@ -40,3 +40,9 @@ a {
     color: blue;
     text-decoration: underline;
 }
+.ql-toolbar {
+    position: sticky;
+    top: 0;
+    background-color: #fff; /* Опционально: указать фоновый цвет */
+    z-index: 1; /* Опционально: установить z-index, если необходимо */
+}

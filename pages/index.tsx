@@ -22,7 +22,7 @@ const TopicList = () => {
 
   return(
       <section className="w-full px-5">
-            {/* <Search /> */}
+            <Search />
 
           <div>
               { data && data.length > 0 && data.map((topic, i) => topic.article.length > 0 && <Topic_block key={i} {...topic}/>) }

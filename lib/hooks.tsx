@@ -60,21 +60,16 @@ export function getArticleWord(number: number) {
     return number + " статей";
   }
 }
-
-// export function getListIdx(str: string, substr: string): string[] {
-//   let listIdx = []
-//   let lastIndex = -1
-//   while ((lastIndex = str.indexOf(substr, lastIndex + 1)) !== -1) {
-//     listIdx.push(lastIndex)
+// export function getMatches(str: string, search: string) {
+//   const regex = new RegExp(`(?<=.{0,10})${search}(?=.{{0,10}})`, 'gi');
+//   const matches = str.match(regex);
+//   const result = [];
+//   for (const match of matches) {
+//     const startIndex = str.indexOf(match);
+//     const endIndex = startIndex + match.length;
+//     const start = Math.max(0, startIndex - 10);
+//     const end = Math.min(str.length, endIndex + 10);
+//     result.push(str.substring(start, end));
 //   }
-//   const result = []
-//   for(let i = 0; i < listIdx.length; i++){
-//     let start = ''
-//     let end = ''
-//     if(listIdx[i] < 30){
-//       start = str[0]
-//     }
-//   }
-//   return listIdx
+//   console.log(result);
 // }
-// getListIdx('abc bca abcabc cba', 'abc') // [ 0, 8, 11 ]

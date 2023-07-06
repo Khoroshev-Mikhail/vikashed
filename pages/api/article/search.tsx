@@ -10,7 +10,11 @@ export interface ReqBodyArticle {
     isPaid: boolean;
     topics: number[];
 }
-
+export const config = {
+    api: {
+        responseLimit: false,
+    },
+}
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const { string } = req.query
     if (req.method === 'GET') {
@@ -24,7 +28,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
                         contains: typeof string === 'string' ? string : undefined
                     }
                 },
-                include: {
+                select: {
+                    name: true,
+                    isVisible: true,
+                    isPaid: true,
+                    text: true,
                     topic: {
                         select: {
                             id: true,
