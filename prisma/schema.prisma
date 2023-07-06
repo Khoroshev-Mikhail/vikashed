@@ -57,6 +57,7 @@ model VerificationToken {
 enum Role {
   ADMIN
   USER
+  PREMIUM_USER // Надоперевести логику на эту роль, а не на строку isPremium. А потом создать кастомный хук который будет возвращать тру или фолс если role === admin || premium_user
 }
 
 model Article {

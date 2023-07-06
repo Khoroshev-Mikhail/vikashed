@@ -31,7 +31,7 @@ export default function Nav(){
                             <Link href="/" className=" text-white no-underline">Главная</Link>
                         </li>
                         <li>
-                            <Link href="/about" className="text-white no-underline">Обо мне</Link>
+                            <Link href="/about" className="text-white no-underline">Автор проекта</Link>
                         </li>
                         <li>
                             <Link href="/pay" className="text-white no-underline">Доступ к платным материалам</Link>

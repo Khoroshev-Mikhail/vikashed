@@ -2,7 +2,6 @@ import { createFetch } from '@/lib/fetchers';
 import React, { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 import useSWRMutation from 'swr/mutation'
 import parse from 'html-react-parser';
-import useSWR from 'swr'
 import { ReqBodyArticle } from '@/pages/api/article';
 import 'react-quill/dist/quill.snow.css'; 
 import dynamic from 'next/dynamic';

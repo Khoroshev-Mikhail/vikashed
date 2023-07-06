@@ -4,6 +4,7 @@ import useSWR from 'swr'
 import { useSession } from 'next-auth/react';
 import Image from 'next/image';
 import edit from '../../public/images/edit.svg'
+import usd from '../../public/images/usd.svg'
 import Link from 'next/link';
 
 
@@ -15,21 +16,23 @@ const Article: React.FC = () => {
     return (
         //breadcrumbs
         <>
-        {data && 
-            <div className='px-5 w-full'>
+            {data && 
+                <div className='px-5 w-full md:w-2/3  mx-auto'>
 
-                {session?.user?.role === 'ADMIN' &&
-                    <div className='flex'>
-                        <Link href={`/admin/article/${data.id}`}><Image src={edit} alt='Редактировать'/></Link>
+                    {session?.user?.role === 'ADMIN' &&
+                        <div className='flex'>
+                            <Link href={`/admin/article/${data.id}`}><Image src={edit} alt='Редактировать'/></Link>
+                        </div>
+                    }
+
+                    <h1 className='w-full border-b pb-2 mt-4'>
+                        { data.isPaid && session?.user.role === 'ADMIN' && <Image src={usd} alt='$$$' className='inline'/> } {data.name}
+                    </h1>
+                    <div className='mt-2'>
+                        {data?.text && parse(data.text)}
                     </div>
-                }
-
-                <h1 className='w-full border-b pb-2 mt-4'>{data.name}</h1>
-                <div className='mt-2'>
-                    {data?.text && parse(data.text)}
                 </div>
-            </div>
-        }
+            }
         </>
     );
 };
